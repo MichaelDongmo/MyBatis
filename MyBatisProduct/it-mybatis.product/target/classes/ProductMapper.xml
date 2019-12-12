@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.model.ProductMapper">
+	<resultMap id="productResult" type="product">
+		<id property="product_id" column="product_id" />
+		<id property="product_name" column="product_name" />
+		<id property="product_qty" column="product_qty" />
+		<id property="product_price" column="product_price" />
+		<id property="product_cathegory" column="product_cathegory" />
+	</resultMap>
+	<select id="selectProduct" resultType="product"
+		parameterType="int" resultMap="productResult">
+		SELECT product_id, product_name, product_qty,product_price, product_cathegory  from product WHERE product_id = #{product_id}
+	</select>
+	<insert id="insertProduct" parameterType="product" keyProperty="product_id"> <!-- userGeneratedKeys="true" -->
+		INSERT into
+		product(product_id, product_name, product_qty,product_price, product_cathegory) VALUES (#{product_id}, #{product_name}, #{product_qty},#{product_price},#{product_cathegory})
+	</insert>
+	<update id="updateProduct" parameterType="product">
+		UPDATE product SET product_name=#{product_name}, product_qty=#{product_qty},product_price=#{product_price},product_cathegory=#{product_cathegory} WHERE product_id=#{product_id}
+	</update>
+	<delete id="deleteProduct" parameterType="int">
+		DELETE FROM PRODUCT WHERE product_id=#{product_id}
+	</delete>
+</mapper>
